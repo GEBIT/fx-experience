@@ -3,13 +3,13 @@
 	<parent>
 		<groupId>org.comtel2000</groupId>
 		<artifactId>fx-parent</artifactId>
-		<version>8.2.5-SNAPSHOT</version>
+		<version>8.2.5.gebit</version>
 	</parent>
 	<artifactId>fx-onscreen-keyboard-swing</artifactId>
 	<name>fx-onscreen-keyboard-swing</name>
 	<description>JavaFX on-screen keyboard Swing support module.</description>
 	<url>http://comtel2000.org</url>
-	<packaging>jar</packaging>
+	<packaging>bundle</packaging>
 
 	<dependencies>
 		<dependency>
@@ -27,4 +27,28 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+		        <groupId>org.apache.felix</groupId>
+		        <artifactId>maven-bundle-plugin</artifactId>
+		        <extensions>true</extensions>
+			</plugin>
+		</plugins>
+	</build>
+	
 </project>
