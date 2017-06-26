@@ -31,6 +31,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
+import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -42,6 +43,7 @@ import org.comtel2000.keyboard.robot.FXRobotHandler;
 import org.comtel2000.keyboard.robot.IRobot;
 import org.comtel2000.keyboard.xml.KeyboardLayoutHandler;
 import org.comtel2000.keyboard.xml.layout.Keyboard;
+import org.osgi.framework.FrameworkUtil;
 import org.slf4j.LoggerFactory;
 
 import javafx.animation.KeyFrame;
@@ -301,6 +303,16 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 			return;
 		}
 		URL url = KeyboardLayoutHandler.class.getResource(root + "/" + file);
+		// first, try osgi-way
+		if (url == null) {
+			try {
+				url = FrameworkUtil.getBundle(KeyboardLayoutHandler.class).getBundleContext().getBundle().getEntry(root
+						+ "/"
+						+ file);
+			} catch (Exception ex) {
+				// ignore
+			}
+		}
 		if (url == null && Files.exists(Paths.get(root, file))) {
 			url = Paths.get(root, file).toUri().toURL();
 		}
@@ -338,29 +350,59 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 			String layer = getLayer().toString().toLowerCase(tempDefaultLocale);
 			URL url = Objects.requireNonNull(KeyboardLayoutHandler.class.getResource("/xml/" + layer));
 			logger.debug("use embedded layer path: {}", url);
-			if (url.toExternalForm().contains("!")) {
-				availableLocales.put(tempDefaultLocale, "/xml/" + layer);
-				String[] array = url.toExternalForm().split("!");
-				try (FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), Collections.emptyMap())) {
-					final Path path = fs.getPath(array[1]);
-					try (DirectoryStream<Path> stream = Files.newDirectoryStream(path)) {
-						for (Path p : stream) {
-							if (Files.isDirectory(p)) {
-								String lang = p.getFileName().toString().replace("/", "");
-								Locale l = new Locale(lang);
-								availableLocales.put(l, array[1] + "/" + lang);
-								tempDefaultLocaleOrder.add(l);
+
+			try {
+				// osgi-way
+				Enumeration<String> tempBundlePaths = FrameworkUtil.getBundle(KeyboardLayoutHandler.class)
+						.getBundleContext()
+						.getBundle()
+						.getEntryPaths("/xml/" + layer);
+				if (tempBundlePaths.hasMoreElements()) {
+					// add default locale
+					availableLocales.put(tempDefaultLocale, "/xml/" + layer);
+				}
+				while (tempBundlePaths.hasMoreElements()) {
+					String tempString = tempBundlePaths.nextElement();
+					if (!tempString.endsWith(".xml")) {
+						if (tempString.endsWith("/")) {
+							tempString = tempString.substring(0, tempString.lastIndexOf("/"));
+						}
+						String lang = tempString.substring(tempString.lastIndexOf("/") + 1);
+						Locale l = new Locale(lang);
+						availableLocales.put(l, tempString);
+						tempDefaultLocaleOrder.add(l);
+					}
+				}
+			} catch (Exception ex) {
+				// ignore and try non-osgi way
+			}
+
+			// old non-osgi context -> left here for later use
+			if (availableLocales.isEmpty()) {
+				if (url.toExternalForm().contains("!")) {
+					availableLocales.put(tempDefaultLocale, "/xml/" + layer);
+					String[] array = url.toExternalForm().split("!");
+					try (FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), Collections.emptyMap())) {
+						final Path path = fs.getPath(array[1]);
+						try (DirectoryStream<Path> stream = Files.newDirectoryStream(path)) {
+							for (Path p : stream) {
+								if (Files.isDirectory(p)) {
+									String lang = p.getFileName().toString().replace("/", "");
+									Locale l = new Locale(lang);
+									availableLocales.put(l, array[1] + "/" + lang);
+									tempDefaultLocaleOrder.add(l);
+								}
 							}
 						}
+					} catch (Exception e) {
+						logger.error(e.getMessage(), e);
 					}
-				} catch (Exception e) {
-					logger.error(e.getMessage(), e);
-				}
-			} else {
-				try {
-					setLayerPath(Paths.get(url.toURI()));
-				} catch (URISyntaxException e) {
-					logger.error(e.getMessage(), e);
+				} else {
+					try {
+						setLayerPath(Paths.get(url.toURI()));
+					} catch (URISyntaxException e) {
+						logger.error(e.getMessage(), e);
+					}
 				}
 			}
 		}
@@ -379,7 +421,6 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 			}
 			logger.debug("locales: {}", availableLocales.keySet());
 		}
-		tempDefaultLocaleOrder.add(2, Locale.FRENCH);
 		defineLocaleOrder(tempDefaultLocaleOrder);
 		return availableLocales;
 	}
@@ -1222,4 +1263,5 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 		}
 		return tempCurrentLocale;
 	}
+
 }
