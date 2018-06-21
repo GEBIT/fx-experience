@@ -18,7 +18,7 @@
 	<Row>
 		<Key codes="" keyWidth="10" />
 		<Key codes="35" keyLabel="#" />
-		<Key codes="36" keyLabel="$" />
+		<Key codes="36,164" keyLabel="$" />
 		<Key codes="37" keyLabel="%" />
 		<Key codes="38" keyLabel="&amp;" />
 		<Key codes="42" keyLabel="*" />
@@ -30,13 +30,13 @@
 	</Row>
 	<Row>
 		<Key codes="-1" keyLabel="I" keyLabelStyle=".font-fxkeyboard" keyWidth="40" modifier="true" sticky="true" />
-		<Key codes="33" keyLabel="!" />
-		<Key codes="34" keyLabel="&quot;" />
+		<Key codes="33,161" keyLabel="!" />
+		<Key codes="34,171,187" keyLabel="&quot;" />
 		<Key codes="39" keyLabel="'" />
 		<Key codes="58" keyLabel=":" />
 		<Key codes="59" keyLabel=";" />
 		<Key codes="47" keyLabel="/" />
-		<Key codes="63" keyLabel="?" />
+		<Key codes="63,191" keyLabel="?" />
 		<Key codes="44" keyLabel="," />
 		<Key codes="46" keyLabel="." />
 		<Key codes="-1" keyLabel="I" keyLabelStyle=".font-fxkeyboard" keyWidth="40" modifier="true" sticky="true" />

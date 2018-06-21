@@ -306,9 +306,8 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 		// first, try osgi-way
 		if (url == null) {
 			try {
-				url = FrameworkUtil.getBundle(KeyboardLayoutHandler.class).getBundleContext().getBundle().getEntry(root
-						+ "/"
-						+ file);
+				url = FrameworkUtil.getBundle(KeyboardLayoutHandler.class).getBundleContext().getBundle()
+						.getEntry(root + "/" + file);
 			} catch (Exception ex) {
 				// ignore
 			}
@@ -354,9 +353,7 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 			try {
 				// osgi-way
 				Enumeration<String> tempBundlePaths = FrameworkUtil.getBundle(KeyboardLayoutHandler.class)
-						.getBundleContext()
-						.getBundle()
-						.getEntryPaths("/xml/" + layer);
+						.getBundleContext().getBundle().getEntryPaths("/xml/" + layer);
 				if (tempBundlePaths.hasMoreElements()) {
 					// add default locale
 					availableLocales.put(tempDefaultLocale, "/xml/" + layer);
@@ -427,7 +424,7 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 
 	/**
 	 * Defines the order of locales.
-	 * 
+	 *
 	 * @param aLocales the locales, sorted correctly
 	 */
 	public void defineLocaleOrder(List<Locale> aLocales) {
@@ -460,8 +457,7 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 	public void setKeyboardType(String type) {
 		KeyboardType kType;
 		try {
-			kType = type == null || type.isEmpty()
-					? KeyboardType.TEXT
+			kType = type == null || type.isEmpty() ? KeyboardType.TEXT
 					: KeyboardType.valueOf(type.toUpperCase(Locale.ENGLISH));
 		} catch (Exception e) {
 			logger.error("unknown type: {}", type);
@@ -659,8 +655,8 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 
 				} else if (key.getKeyIconStyle() != null && key.getKeyIconStyle().startsWith("@")) {
 
-					try (InputStream is = KeyboardPane.class.getResourceAsStream(key.getKeyIconStyle().replace("@", "/")
-							+ ".png")) {
+					try (InputStream is =
+							KeyboardPane.class.getResourceAsStream(key.getKeyIconStyle().replace("@", "/") + ".png")) {
 						Image image = new Image(is);
 						if (!image.isError()) {
 							button.setGraphic(new ImageView(image));
@@ -672,9 +668,8 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 					}
 				}
 
-				button.setText(key.getKeyLabel() != null
-						? key.getKeyLabel()
-						: Character.toString((char) button.getKeyCode()));
+				button.setText(
+						key.getKeyLabel() != null ? key.getKeyLabel() : Character.toString((char) button.getKeyCode()));
 				button.setKeyText(key.getKeyOutputText());
 
 				if (key.getKeyEdgeFlags() != null) {
@@ -769,7 +764,8 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 			setKeyboardType(isControl(), isShift(), isSymbol());
 			break;
 		case LOCALE_SWITCH:
-			switchLocale(getNextLocale(kb.getText()));
+			switchLocale(
+					kb instanceof MultiKeyButton ? getNextLocale(kb.getText()) : Locale.forLanguageTag(kb.getText()));
 			break;
 		case ENTER:
 			sendToComponent((char) java.awt.event.KeyEvent.VK_ENTER, true);
@@ -1251,7 +1247,7 @@ public class KeyboardPane extends Region implements StandardKeyCode, EventHandle
 
 	/**
 	 * Returns the next locale after pressing the switch locale button.
-	 * 
+	 *
 	 * @param aCurrentLocale the currently selected locale
 	 * @return the next locale
 	 */

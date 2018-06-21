@@ -21,13 +21,13 @@
 		<Key codes="" keyWidth="10" />
 		<Key codes="65,196,197,195,194,193,192" keyLabel="A" />
 		<Key codes="83,223" keyLabel="S" />
-		<Key codes="68" keyLabel="D" />
+		<Key codes="68,209" keyLabel="D" />
 		<Key codes="70" keyLabel="F" />
 		<Key codes="71" keyLabel="G" />
 		<Key codes="72" keyLabel="H" />
 		<Key codes="74" keyLabel="J" />
 		<Key codes="75" keyLabel="K" />
-		<Key codes="76" keyLabel="L" />
+		<Key codes="76,321" keyLabel="L" />
 		<Key codes="-9" keyLabel="ENTER" keyLabelStyle=".small-style" keyWidth="70" />
 	</Row>
 
@@ -48,7 +48,8 @@
 	<Row rowEdgeFlags="bottom">
 		<Key codes="-6" keyLabel="STRG" keyLabelStyle=".small-style" keyWidth="50" />
 		<Key codes="-2" keyLabel="?123" keyLabelStyle=".small-style" keyWidth="50" />
-		<Key codes="32" keyLabel="3" keyLabelStyle=".font-fxkeyboard-alpha" movable="true" keyWidth="240" repeatable="true" />
+		<Key codes="94,807,808,770,780,774,768,775,769,771,778,783,776,779" keyLabel="A+`" keyLabelStyle=".combining-accents-style" keyWidth="50" />
+		<Key codes="32" keyLabel="3" keyLabelStyle=".font-fxkeyboard-alpha" movable="true" keyWidth="190" repeatable="true" />
 		<Key codes="-7" keyLabel="DE" keyLabelStyle=".small-style" keyWidth="50" />
 		<Key codes="-3" keyLabel="2" keyLabelStyle=".font-fxkeyboard" keyWidth="50" />
 	</Row>

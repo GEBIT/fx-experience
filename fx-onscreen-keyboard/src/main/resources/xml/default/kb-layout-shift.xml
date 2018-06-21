@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <Keyboard keyWidth="40" keyHeight="30" horizontalGap="0" verticalGap="0">
 
 	<Row>
 		<Key codes="81" keyLabel="Q" />
 		<Key codes="87" keyLabel="W" />
-		<Key codes="69" keyLabel="E" />
-		<Key codes="82" keyLabel="R" />
-		<Key codes="84" keyLabel="T" />
-		<Key codes="89" keyLabel="Y" />
-		<Key codes="85,220,219,218,217" keyLabel="U" />
-		<Key codes="73" keyLabel="I" />
-		<Key codes="79,214,213,212,211,210,216" keyLabel="O" />
+		<Key codes="69,280,278,203,274,282,202,200,201,516" keyLabel="E" />
+		<Key codes="82,344,342,340,528" keyLabel="R" />
+		<Key codes="84,354,356,538" keyLabel="T" />
+		<Key codes="89,376,221" keyLabel="Y" />
+		<Key codes="85,220,219,218,217,368,532,362,366,370" keyLabel="U" />
+		<Key codes="73,304,207,298,206,205,204,520,302" keyLabel="I" />
+		<Key codes="79,214,213,212,211,210,216,332,336,524,338" keyLabel="O" />
 		<Key codes="80" keyLabel="P" />
 		<Key codes="-5" keyLabel="!" keyLabelStyle=".font-fxkeyboard" repeatable="true" />
 	</Row>
 
 	<Row>
 		<Key codes="" keyWidth="10" />
-		<Key codes="65,196,197,195,194,193,192" keyLabel="A" />
-		<Key codes="83,223" keyLabel="S" />
-		<Key codes="68" keyLabel="D" />
+		<Key codes="65,196,197,195,194,193,192,512,258,256,260,198" keyLabel="A" />
+		<Key codes="83,223,352,350,346" keyLabel="S" />
+		<Key codes="68,208,270" keyLabel="D" />
 		<Key codes="70" keyLabel="F" />
-		<Key codes="71" keyLabel="G" />
+		<Key codes="71,286,290" keyLabel="G" />
 		<Key codes="72" keyLabel="H" />
 		<Key codes="74" keyLabel="J" />
-		<Key codes="75" keyLabel="K" />
-		<Key codes="76" keyLabel="L" />
+		<Key codes="75,310" keyLabel="K" />
+		<Key codes="76,321,317,313,315" keyLabel="L" />
 		<Key codes="-9" keyLabel="ENTER" keyLabelStyle=".small-style" keyWidth="70" />
 	</Row>
 
 	<Row>
 		<Key codes="-1" keyLabel="J" keyLabelStyle=".font-fxkeyboard" keyWidth="40" modifier="true" sticky="true" />
-		<Key codes="90" keyLabel="Z" />
+		<Key codes="90,381,379,377" keyLabel="Z" />
 		<Key codes="88" keyLabel="X" />
-		<Key codes="67" keyLabel="C" />
+		<Key codes="67,199,268,262" keyLabel="C" />
 		<Key codes="86" keyLabel="V" />
 		<Key codes="66" keyLabel="B" />
-		<Key codes="78" keyLabel="N" />
+		<Key codes="78,209,325,323,327" keyLabel="N" />
 		<Key codes="77" keyLabel="M" />
 		<Key codes="59" keyLabel=";" />
 		<Key codes="58" keyLabel=":" />
@@ -47,7 +46,8 @@
 	<Row rowEdgeFlags="bottom">
 		<Key codes="-6" keyLabel="CTRL" keyLabelStyle=".small-style" keyWidth="50" />
 		<Key codes="-2" keyLabel="?123" keyLabelStyle=".small-style" keyWidth="50" />
-		<Key codes="32" keyLabel="3" keyLabelStyle=".font-fxkeyboard-alpha" movable="true" keyWidth="240" repeatable="true" />
+		<Key codes="94,807,808,770,780,774,768,775,769,771,778,783,776,779" keyLabel="A+`" keyLabelStyle=".combining-accents-style" keyWidth="50" />
+		<Key codes="32" keyLabel="3" keyLabelStyle=".font-fxkeyboard-alpha" movable="true" keyWidth="190" repeatable="true" />
 		<Key codes="-7" keyLabel="EN" keyLabelStyle=".small-style" keyWidth="50" />
 		<Key codes="-3" keyLabel="2" keyLabelStyle=".font-fxkeyboard" keyWidth="50" />
 	</Row>
